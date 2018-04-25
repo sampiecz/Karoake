@@ -9,8 +9,8 @@
 # Purpose: Karoake web app for djs.                       # 
 ###########################################################
 
-CREATE TABLE Singer( singerId integer AUTO_INCREMENT, name Char(20),  paid bool, primary key(singerId));
-CREATE TABLE Song( songId integer AUTO_INCREMENT, title Char(20), primary key(songId));
-CREATE TABLE Contributor( contributorId integer AUTO_INCREMENT, songId int, singerId int, primary key(contributorId), FOREIGN KEY (songId) REFERENCES Song (songId), FOREIGN KEY (singerId) REFERENCES Singer (singerId));
-CREATE TABLE KaroakeFile( fileId integer AUTO_INCREMENT, singerId int, songId int, primary key (fileId), FOREIGN KEY (singerId) REFERENCES Singer (singerId), FOREIGN KEY (songId) REFERENCES Song (songId));
-CREATE TABLE Queue( queueId integer AUTO_INCREMENT, position int, fileId int, primary key (queueId), FOREIGN KEY (fileId) REFERENCES KaroakeFile (fileId));
+CREATE TABLE Band ( bandId integer AUTO_INCREMENT, name Char(255));
+CREATE TABLE Song ( songId integer AUTO_INCREMENT, name Char(255), bandId int, FOREIGN KEY (bandId) REFERENCES Band (bandId));
+CREATE TABLE BandMember( bandMemberId integer AUTO_INCREMENT, name Char(255), instrument Char(255), bandId int, FOREIGN KEY (bandId) REFERENCES Band (bandId));
+CREATE TABLE Requester ( requesterId integer AUTO_INCREMENT, name Char(255)); 
+CREATE TABLE Request ( requestId integer AUTO_INCREMEMNT, paid bool, songId int, requesterId int, FOREIGN KEY (songId) REFERENCES Song (songId), FOREIGN KEY (requesterId) REFERENCES Requester (reqeusterId)); 
