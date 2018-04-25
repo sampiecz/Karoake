@@ -1,13 +1,8 @@
-###########################################################
-# CSCI 466 - Group Project - Spring 2018                  #
-#                                                         #
-# Progammer: Sam Piecz                                    #
-# Z-ID: Z1732715                                          #
-# Section: 3                                              #
-# TA: Rajarshi Sen                                        #
-# Date Due: Apr 30, 2018                                  # 
-# Purpose: Karoake web app for djs.                       # 
-###########################################################
+DROP TABLE IF EXISTS Request;
+DROP TABLE IF EXISTS Requester;
+DROP TABLE IF EXISTS BandMember;
+DROP TABLE IF EXISTS Song;
+DROP TABLE IF EXISTS Band;
 
 CREATE TABLE Band
 (
@@ -55,3 +50,14 @@ CREATE TABLE Request
     FOREIGN KEY (requesterId) REFERENCES Requester (requesterId)
 ); 
 
+# Generate Band, Band Members, and Song
+INSERT INTO Band (name) VALUES ("Death Grips");
+INSERT INTO BandMember (name, instrument, bandId) VALUES ('MC Ride', 'Front Man', 1); 
+INSERT INTO BandMember (name, instrument, bandId) VALUES ('Zach Hill', 'Drummer', 1);
+INSERT INTO BandMember (name, instrument, bandId) VALUES ('Andy Morin', 'Recording Engineer', 1);
+INSERT INTO Song (name, bandId) VALUES ('Hacker', 1); 
+
+# Generate Requester, and Request
+INSERT INTO Requester (name) VALUES ('Dr. Freeman');
+INSERT INTO Request (paid, amountpaid, songId, requesterId, hasplayed)
+VALUES (True, 70, 1, 1, False); 

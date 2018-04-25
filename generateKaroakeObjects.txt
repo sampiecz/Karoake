@@ -1,0 +1,37 @@
+DROP TABLE Request;
+DROP TABLE Requester;
+DROP TABLE BandMember;
+DROP TABLE Song;
+DROP TABLE Band;
+
+MariaDB [z1732715]> SHOW TABLES;
++--------------------+
+| Tables_in_z1732715 |
++--------------------+
+| Marina             |
+| MarinaSlip         |
+| Owner              |
+| ServiceCategory    |
++--------------------+
+4 rows in set (0.00 sec)
+
+MariaDB [z1732715]> \. karoake.sql
+Query OK, 0 rows affected (0.48 sec)
+
+Query OK, 0 rows affected (0.54 sec)
+
+Query OK, 0 rows affected (0.71 sec)
+
+Query OK, 0 rows affected (0.35 sec)
+
+Query OK, 0 rows affected (0.75 sec)
+
+MariaDB [z1732715]> INSERT INTO Band (name);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+MariaDB [z1732715]> INSERT INTO Band (name) VALUES ("Death Grips");
+Query OK, 1 row affected (0.05 sec)
+
+MariaDB [z1732715]> INSERT INTO BandMember (name, instrument, bandId) VALUES ('     
+    '> 
+    '> Ctrl-C -- exit!
+Aborted
