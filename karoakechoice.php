@@ -5,9 +5,19 @@
 <h1 align='center'>Choose Song</h1>
 
 <?php
+    try
+    {
+        $dsn="mysql:host=courses; dbname=z1732715";
+        $pdo = new PDO($dsn, 'z1732715', '1996Apr23');
+    }
 
-  //Sign in to server
-  include 'signOnSql.php';
+    catch(PDOexception $e)
+    {
+        echo 'Connection to databse failed' .$e->getmessage();
+    }	
+?>
+
+<?php
 
   //Placeholder
   //requester should equal requesterId from search
@@ -15,25 +25,21 @@
 
 
   //Choose Song Form
-  echo"<form method=post align='center'>";
+  echo"<form method='post'>";
 
   //Placeholder for songs gotten from search
   //Loop through songs displayed in radio buttons
   //name=song value=songId
-  echo"<input type='radio' name='song' value='1'> Song Name<br>
-  <br>";
+  echo"<table><tr><td><label>Song Name</label><input type='radio' name='song' value='1'></td></tr>";
 
   //Choose paid or unpaid
-  echo"<table align='center'>
+  echo"
     <tr><td>Queue</td></tr>
     <tr><td><input type='radio' name='queue' value='0'> Free Queue<td><tr>
     <tr><td><input type='radio' name='queue' value='1'> Priority Queue<td>
     <td><input type='text' name='amountPaid'/></td></tr>
-</table>
-<p>
-  <input type='Submit' name='Submit' value='Submit'/>
-  <input type='reset' value='Reset'/>
-</p>
+    <tr><td><input type='Submit' name='Submit' value='Submit'/></td></tr>
+    <tr><td><input type='reset' value='Reset'/></td></tr>
 </form>";
 
 //When submit button is hit

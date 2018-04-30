@@ -1,3 +1,14 @@
+###########################################################
+# CSCI 466 - Group Project - Spring 2018                  #
+#                                                         #
+# Progammer: Sam Piecz                                    #
+# Z-ID: Z1732715                                          #
+# Section: 3                                              #
+# TA: Rajarshi Sen                                        #
+# Date Due: Apr 30, 2018                                  # 
+# Purpose: Karoake web app for djs.                       # 
+###########################################################
+
 DROP TABLE IF EXISTS Request;
 DROP TABLE IF EXISTS Requester;
 DROP TABLE IF EXISTS BandMember;
