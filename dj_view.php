@@ -45,8 +45,8 @@
 
     # Output paid table first
     echo '
-    <div width="50%">
-        <table width="100%" border="50px" cellpadding="25%">
+    <div width="50%" style="float:left;">
+        <table width="100%"  border="35px" cellpadding="25%">
             <tr>
                 <td>
                     <center>
@@ -55,7 +55,7 @@
                 </td>
             </tr>
         </table>
-        <table width="100%" border="50px" cellpadding="25%">
+        <table width="100%"  border="35px" cellpadding="25%">
             <tr>
                 <th>Requester Name</th>
                 <th>Song Name</th>
@@ -114,8 +114,8 @@
 
     # Output free table next 
     echo '
-    <div width="50%">
-        <table width="100%" border="50px" cellpadding="25%">
+    <div width="50%" style="float:right;">
+        <table width="100%" border="35px" cellpadding="25%">
             <tr>
                 <td>
                     <center>
@@ -124,7 +124,7 @@
                 </td>
             </tr>
         </table>
-        <table width="100%" border="50px" cellpadding="25%">
+        <table width="100%" border="35px" cellpadding="25%">
             <tr>
                 <th>Requester Name</th>
                 <th>Song Name</th>
