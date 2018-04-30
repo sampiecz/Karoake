@@ -70,6 +70,5 @@ INSERT INTO Song (name, bandId) VALUES ('Hacker', 1);
 
 # Generate Requester, and Request
 INSERT INTO Requester (name) VALUES ('Dr. Freeman');
-INSERT INTO Requester (name) VALUES ('Victor E. Husky');
 INSERT INTO Request (paid, amountpaid, songId, requesterId, hasplayed) VALUES (True, 70, 1, 1, False); 
-INSERT INTO Request (paid, amountpaid, songId, requesterId, hasplayed) VALUES (False, 0, 1, 1, True); 
+INSERT INTO Request (paid, amountpaid, songId, requesterId, hasplayed) VALUES (False, 0, 1, 1, False); 
