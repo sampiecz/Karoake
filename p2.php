@@ -4,7 +4,6 @@
     $pageName = "Page 2";
      echo "<h1>$pageName</h1></center></td></tr></table></div>";
 ?>
-<h1 align='center'> Karaoke Pg 2 </h1>
 <p align='center'> Please choose song version and add it to desired queue, you may choose to pay and get your song played early </p>
 
 <!-- Connect to the database -->

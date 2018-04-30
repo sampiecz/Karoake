@@ -1,20 +1,12 @@
-<!DOCTYPE html>
-<!--|Name: Samuel Piecz, Chris, Christopher, Abdul, Philip       -->
-<!--|Section: 3               -->
-<!--|Instructor Name: Lehuta  -->
-<!--|TA Name:  Raj            -->
-<!--|Semester: Spring         -->
-<!--|Due Date: 4/30/18         -->
-<html>
-    <head>
-        <title>CSCI 466 NIU - Group Project</title>
-        <meta name="description" content="This is a karoake app.">
-        <link rel="shortcut icon" href="favicon.ico" />
-    </head>
-    <body>
+<?php include 'header.html'; ?>
+
+<?php
+    $pageName = "Index";
+     echo "<h1>$pageName</h1></center></td></tr></table></div>";
+?>
         <div>
             <form method="POST" action"">
-                <table>
+                <table width="100%" border="50px" cellpadding="25%">
                     <tr>
                         <td>
                             <h2>Request a song</h2>
@@ -40,7 +32,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <input action="submit"> 
+                            <input action="submit" type="submit"> 
                         </td>
                     </tr>
                 </table>
