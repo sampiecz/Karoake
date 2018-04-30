@@ -25,14 +25,14 @@
     
     # Get paid requests 
     $paidSql = "
-       SELECT * FROM Request WHERE paid = True LIMIT 10; 
+       SELECT s.name 'Song Name', r.name 'Requester Name', request.requestId 'Request Id', request.amountpaid 'Amount Paid', request.hasplayed 'Has Played'  FROM Song s JOIN Request request JOIN Requester r ON request.songId = s.songId AND r.requesterId = request.requesterId WHERE request.paid = True;
     ";
     $paidResult = $pdo->query($paidSql);
     $paidRows = $paidResult->fetchAll();
 
     # Get free requests
     $freeSql = "
-       SELECT * FROM Request WHERE paid = True LIMIT 10; 
+       SELECT s.name 'Song Name', r.name 'Requester Name', request.requestId 'Request Id', request.hasplayed 'Has Played' FROM Song s JOIN Request request JOIN Requester r ON request.songId = s.songId AND r.requesterId = request.requesterId WHERE request.paid = False; 
     ";
     $freeResult = $pdo->query($freeSql);
     $freeRows = $freeResult->fetchAll();
@@ -52,8 +52,8 @@
         </table>
         <table width="100%" border="50px" cellpadding="25%">
             <tr>
-                <th>Requester Id</th>
-                <th>Song Id</th>
+                <th>Requester Name</th>
+                <th>Song Name</th>
                 <th>Amount Paid</th>
                 <th>Has Played</th>
             </tr>
@@ -64,17 +64,17 @@
         echo ' 
             <tr>
                 <td>
-                    <center>' . $row['requesterId'] . '</center>
+                    <center>' . $row['Requester Name'] . '</center>
                 </td>
                 <td>
-                    <center>' . $row['songId'] . '</center>
+                    <center>' . $row['Song Name'] . '</center>
                 </td>
                 <td>
-                    <center>' . $row['amountpaid'] . '</center>
+                    <center>' . $row['Amount Paid'] . '</center>
                 </td>
                 <td>';
 
-        if ($row['hasplayed'] == False)
+        if ($row['Has Played'] == False)
         {
             echo '<center><p>No.</p></center>'; 
         }
@@ -113,8 +113,8 @@
         </table>
         <table width="100%" border="50px" cellpadding="25%">
             <tr>
-                <th>Requester Id</th>
-                <th>Song Id</th>
+                <th>Requester Name</th>
+                <th>Song Name</th>
                 <th>Has Played</th>
             </tr>
     ';
@@ -123,14 +123,14 @@
         echo ' 
             <tr>
                 <td>
-                    <center>' . $row['requesterId'] . '</center>
+                    <center>' . $row['Requester Name'] . '</center>
                 </td>
                 <td>
-                    <center>' . $row['songId'] . '</center>
+                    <center>' . $row['Song Name'] . '</center>
                 </td>
                 <td>';
 
-        if ($row['hasplayed'] == False)
+        if ($row['Has Played'] == False)
         {
             echo '<center><p>No.</p></center>'; 
         }
