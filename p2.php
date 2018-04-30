@@ -1,6 +1,9 @@
-<html>
-<head> <title> Karaoke pg 2 </title><head>
-<body>
+<?php include 'header.html'; ?>
+
+<?php
+    $pageName = "Page 2";
+     echo "<h1>$pageName</h1></center></td></tr></table></div>";
+?>
 <h1 align='center'> Karaoke Pg 2 </h1>
 <p align='center'> Please choose song version and add it to desired queue, you may choose to pay and get your song played early </p>
 
@@ -23,43 +26,49 @@
 
 
 <?php
-$title = $_POST['title'];
-$artist = $_POST['artist'];
-$contr = $_POST['contr'];
+$title = trim($_POST['title']);
+$artist = trim($_POST['artist']);
+$contr = trim($_POST['contr']);
 
-if(strlen($title)>1)
-	{
-		$prepared =$pdo->prepare('select s.name as Title,b.name as Artist,m.name as Contributor from Song as s, Band as b, BandMember as m where s.bandId=b.bandId and b.bandId=m.bandId and s.name like ? group by Title');
-		
-		$prepared->execute(array("$title%"));
-	}
-else if (strlen($artist) >1)
+
+if($_SERVER['REQUEST_METHOD'] == 'POST')
 {
-		$prepared =$pdo->prepare('select s.name as Title,b.name as Artist,m.name as Contributor from Song as s, Band as b, BandMember as m where s.bandId=b.bandId and b.bandId=m.bandId and b.name like ? group by Artist');
 
-		$prepared->execute(array("$artist%"));
+    if(strlen($title)>1)
+        {
+            $prepared =$pdo->prepare('select s.name as Title,b.name as Artist,m.name as Contributor from Song as s, Band as b, BandMember as m where s.bandId=b.bandId and b.bandId=m.bandId and s.name like ? group by Title');
+            
+            $prepared->execute(array("$title%"));
+        }
+    else if (strlen($artist) >1)
+    {
+            $prepared =$pdo->prepare('select s.name as Title,b.name as Artist,m.name as Contributor from Song as s, Band as b, BandMember as m where s.bandId=b.bandId and b.bandId=m.bandId and b.name like ? group by Artist');
+
+            $prepared->execute(array("$artist%"));
+    }
+    else if (strlen($contr)>1)
+    {
+            $prepared =$pdo->prepare('select s.name as Title,b.name as Artist,m.name as Contributor from Song as s, Band as b, BandMember as m where s.bandId=b.bandId and b.bandId=m.bandId and m.name like ? group by Contributor');
+            $prepared->execute(array("$contr%"));
+    }
+
+
+    $rows = $prepared->fetchAll();
+
+
+    echo '<tr>
+        <th> Song Title</th>
+        <th> Artist Name </th>
+        <th> Contributor Name </th>
+          </tr>';
+
+    foreach($rows as $res):
+        echo '<tr> <td>' . $res['Title'] . '</td> <td>' . $res['Artist'] . '</td> <td>' . $res['Contributor'] . '</td> </tr>';
+    endforeach;
+
 }
-else if (strlen($contr)>1)
-{
-		$prepared =$pdo->prepare('select s.name as Title,b.name as Artist,m.name as Contributor from Song as s, Band as b, BandMember as m where s.bandId=b.bandId and b.bandId=m.bandId and m.name like ? group by Contributor');
-		$prepared->execute(array("$contr%"));
-}
 
-
-$rows = $prepared->fetchAll();
-
-
-echo '<tr>
-	<th> Song Title</th>
-	<th> Artist Name </th>
-	<th> Contributor Name </th>
-      </tr>';
-
-foreach($rows as $res)
-	echo "<tr> <td> $res[Title]</td> <td> $res[Artist]</td> <td> $res[Contributor] </td> </tr>";
 ?>
-
-</table>
 <!-- Start test -->
 
 <?php
@@ -68,17 +77,28 @@ foreach($rows as $res)
   //requester should equal requesterId from search
   $requester = '1';
 
+  $songSql = "SELECT songId FROM Song;";	
+  $songPDO = $pdo->query( $songSql );
+  $songRows = $songPDO->fetchAll();
 
   //Choose Song Form
-  echo"<form method='post'>";
+  echo'<form action="/~z1732715/group_project/p1.php" method="post">';
 
   //Placeholder for songs gotten from search
   //Loop through songs displayed in radio buttons
   //name=song value=songId
-  echo"<table>
+  echo '<table>
       <tr>
         <td>
-      <label>Song Name</label><input type='radio' name='song' value='1'></td></tr>";
+            <select name="song">
+            ';
+            foreach( $songRows as $row ):
+                echo '<option value="' . $row['songId'] . '" >' . $row['songId'] . '</option>';
+            endforeach;
+    echo '   
+            </value>
+        </td>
+       </tr>';
 
   //Choose paid or unpaid
   echo"
@@ -145,5 +165,7 @@ else{ echo"<p align='center' style='color:red;'>*No song selected</p>";}
 <!-- End test -->
 
 </body>
+
+<?php include 'footer.html'; ?>
 </html>
 

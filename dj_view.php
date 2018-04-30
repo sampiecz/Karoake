@@ -45,7 +45,7 @@
 
     # Output paid table first
     echo '
-    <div width="50%" style="float:left;">
+    <div width="50%">
         <table width="100%"  border="35px" cellpadding="25%">
             <tr>
                 <td>
@@ -87,7 +87,7 @@
                 </td>
                 <td>';
 
-        if ($row['Has Played'] == False)
+        if ($row['Has Played'] == 0)
         {
             echo '<center><p>No.</p></center>'; 
         }
@@ -114,7 +114,7 @@
 
     # Output free table next 
     echo '
-    <div width="50%" style="float:right;">
+    <div width="50%">
         <table width="100%" border="35px" cellpadding="25%">
             <tr>
                 <td>
@@ -151,7 +151,7 @@
                 </td>
                 <td>';
 
-        if ($row['Has Played'] == False)
+        if ($row['Has Played'] == 1)
         {
             echo '<center><p>No.</p></center>'; 
         }
@@ -187,8 +187,6 @@
     # The resutlt of passing that query to the db
     $result = $pdo->query($sql);
 
-    # $row = $result->fetch(PDO::FETCH_BOTH);
-
     # The result of all the rows of that query
     $allrows = $result->fetchAll();
 
@@ -211,15 +209,12 @@
                         </select>
                     </td>
                 </tr>
+                <tr>
                     <td>
                         <h3>Has been played?</h3>
-                        <label>Yes</label>
+                        <label>Yes or No</label>
                         <br>
-                        <input name="hasplayed" value="true" type="radio">
-                        <br>
-                        <label>No</label>
-                        <br>
-                        <input name="hasplayed" value="false" type="radio">
+                        <input name="hasplayed" type="text">
                     </td>
                 </tr>
                 <tr>
@@ -236,14 +231,20 @@
     if($_SERVER['REQUEST_METHOD'] == 'POST')
     {
         $requestId = trim($_POST['requestId'] ?? '');
-
         $update = trim($_POST['hasplayed'] ?? '');
 
-        $newSql = "UPDATE Request SET hasplayed=:update WHERE requestId=:requestId;";
+        if ($update == "Yes")
+        {
+            $thisvar = "True"; 
+        }
+        else
+        {
+            $thisvar = "False"; 
+        }
 
+        $newSql = "UPDATE Request SET hasplayed=:update WHERE requestId=:requestId;";
         $prepared = $pdo->prepare($newSql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-     
-        $specificServiceRequest= $prepared->execute(array(':update' => $update, ':requestId' => $requestId));
+        $specificServiceRequest= $prepared->execute(array(':update' => $thisvar, ':requestId' => $requestId));
 
         echo '
         <div width="100%">

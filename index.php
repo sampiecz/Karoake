@@ -46,28 +46,6 @@
                 </table>
             </form>
         </div>
-        <div>
-            <table>
-                <tr>
-                    <td>
-                        <a href="p1.php">Page One</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="p2.php">Page Two</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="karoakechoice.php">Karoake Choice</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="dj_view.php">Dj View</a>
-                    </td>
-                </tr>
-            </table>
-    </body>
+    <body> 
+<?php include 'footer.html'; ?>
 </html>
